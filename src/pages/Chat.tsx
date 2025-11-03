@@ -38,7 +38,7 @@ const Chat = () => {
     
     // Add all selected files
     Array.from(files).forEach((file) => {
-      formData.append("files", file);
+      formData.append("file", file);
     });
 
     try {
