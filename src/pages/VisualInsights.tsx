@@ -45,7 +45,7 @@ const VisualInsights = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/highlights"
+          "https://whatif-ragbased-chatbot.onrender.com/highlights"
         );
 
         if (!response.ok) {
@@ -74,7 +74,7 @@ const VisualInsights = () => {
     setSearchLoading(true);
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/search",
+        "https://whatif-ragbased-chatbot.onrender.com/search",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

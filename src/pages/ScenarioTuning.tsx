@@ -54,7 +54,7 @@ const ScenarioTuning = () => {
       }
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/dashboard?mode=ai", {
+        const response = await fetch("https://whatif-ragbased-chatbot.onrender.com/dashboard?mode=ai", {
           method: "GET",
         });
 

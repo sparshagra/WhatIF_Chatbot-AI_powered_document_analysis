@@ -42,7 +42,7 @@ const Chat = () => {
     });
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/upload", {
+      const response = await fetch("https://whatif-ragbased-chatbot.onrender.com/upload", {
         method: "POST",
         body: formData,
       });
@@ -88,7 +88,7 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/search", {
+      const response = await fetch("https://whatif-ragbased-chatbot.onrender.com/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
