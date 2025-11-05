@@ -33,17 +33,10 @@ const Welcome = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center relative overflow-hidden p-4"
-      style={{
-        background:
-          "radial-gradient(circle at 20% 30%, rgba(58,129,245,0.3), transparent 50%), radial-gradient(circle at 80% 70%, rgba(236,72,153,0.3), transparent 50%), linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-      }}
-    >
-
-      <Card className="w-full max-w-md shadow-[var(--shadow-card)] border-border/50">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden p-4 welcome-bg">
+      <Card className="w-full max-w-md shadow-[var(--shadow-card)] border-border/50 backdrop-blur-lg bg-white/90">
         <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+          <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center glow-bot">
             <Bot className="w-8 h-8 text-primary-foreground" />
           </div>
           <div>
