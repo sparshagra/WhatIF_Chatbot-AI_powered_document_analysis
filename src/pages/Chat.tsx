@@ -11,12 +11,6 @@ import Navigation from "@/components/Navigation";
 interface Message {
   role: "user" | "assistant";
   content: string;
-  citations?: Array<{
-    chunk: string;
-    heading: string;
-    line: number;
-    quote: string;
-  }>;
 }
 
 const Chat = () => {
@@ -174,8 +168,12 @@ const Chat = () => {
           const alt = obj.alternative_strategies[0];
           out += `\n\n🛠️ Alternative Strategy: ${alt.strategy}\nWhy: ${alt.why}`;
         }
-
-        return out.trim();
+/////////////////////////////
+        return out
+        .replace(/📄\s*Source References:?.*/gi, "")
+        .replace(/- N\/A.*?no evidence.*?$/gim, "")
+        .replace(/"no evidence.*?"/gim, "")
+        .trim();
       };
 
       const combinedContent = (() => {
@@ -189,11 +187,6 @@ const Chat = () => {
       const assistantMessage: Message = {
         role: "assistant",
         content: combinedContent,
-        citations:
-          parsedData.citations ||
-          parsedData.cost_impact?.citations ||
-          parsedData.recommended_mitigation?.citations ||
-          []
       };
 
 
