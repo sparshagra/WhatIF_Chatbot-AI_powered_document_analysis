@@ -14,17 +14,17 @@ const Welcome = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!name.trim() || !location.trim()) {
       return;
     }
 
     setLoading(true);
-    
+
     // Store in localStorage
     localStorage.setItem("userName", name);
     localStorage.setItem("userLocation", location);
-    
+
     // Simulate API call delay
     setTimeout(() => {
       setLoading(false);
@@ -33,7 +33,14 @@ const Welcome = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-secondary/20 to-accent/10 p-4">
+    <div
+      className="min-h-screen flex items-center justify-center relative overflow-hidden p-4"
+      style={{
+        background:
+          "radial-gradient(circle at 20% 30%, rgba(58,129,245,0.3), transparent 50%), radial-gradient(circle at 80% 70%, rgba(236,72,153,0.3), transparent 50%), linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+      }}
+    >
+
       <Card className="w-full max-w-md shadow-[var(--shadow-card)] border-border/50">
         <CardHeader className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
@@ -64,7 +71,7 @@ const Welcome = () => {
                 className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="location" className="text-sm font-medium">
                 Current Location
