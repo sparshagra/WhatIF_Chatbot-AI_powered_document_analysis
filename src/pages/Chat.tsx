@@ -43,7 +43,7 @@ const Chat = () => {
     
     // Add all selected files
     Array.from(files).forEach((file) => {
-      formData.append("file", file);
+      formData.append("file", file);  
     });
 
     try {
@@ -93,13 +93,12 @@ const Chat = () => {
     setLoading(true);
 
     try {
+      const formData = new FormData();
+      formData.append("question", input);
       const response = await fetch("https://whatif-ragbased-chatbot.onrender.com/ask", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: input,
-        }),
-      });
+        body: formData,
+      }); 
 
       if (!response.ok) {
         throw new Error("Chat request failed");
