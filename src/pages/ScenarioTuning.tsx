@@ -7,6 +7,18 @@ import { useApp } from "@/contexts/AppContext";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 
+// === Slider Dependency Logic (mirrors rag_chain.py) ===
+const PARAM_WEIGHTS = {
+  cost:       { self: 0.5, timeline: 0.2, safety: 0.15, compliance: 0.1, design: 0.05 },
+  timeline:   { self: 0.5, design: 0.2, compliance: 0.15, safety: 0.1, cost: 0.05 },
+  safety:     { self: 0.5, compliance: 0.2, design: 0.15, cost: 0.1, timeline: 0.05 },
+  compliance: { self: 0.5, design: 0.2, timeline: 0.15, safety: 0.1, cost: 0.05 },
+  design:     { self: 0.5, compliance: 0.2, timeline: 0.15, cost: 0.1, safety: 0.05 },
+};
+
+const FINAL_WEIGHTS = { cost: 0.3, timeline: 0.2, compliance: 0.2, design: 0.1, sustainability: 0.2 };
+
+
 interface ScoreData {
   scores: {
     cost: { score: number; why: string };
@@ -61,6 +73,38 @@ const ScenarioTuning = () => {
       }
     }
   }, [globalScoreData, adjustedScores]);
+
+  // === Frontend replication of dependency logic ===
+const recalcScores = (changedParam: keyof typeof weights, newValue: number) => {
+  if (!adjustedScores) return;
+
+  const newScores = { ...adjustedScores, [changedParam]: newValue };
+
+  // update dependent sliders dynamically using PARAM_WEIGHTS
+  Object.keys(PARAM_WEIGHTS).forEach((param) => {
+    if (param === changedParam) return;
+    const w = PARAM_WEIGHTS[param as keyof typeof PARAM_WEIGHTS];
+    const related = ["cost", "timeline", "compliance", "design", "safety"];
+    let score = 0;
+    related.forEach((r) => {
+      if (r === param) score += (w.self || 0.5) * (newScores[r as keyof typeof newScores] ?? adjustedScores[r as keyof typeof adjustedScores]);
+      else score += (w[r as keyof typeof w] || 0) * (newScores[r as keyof typeof newScores] ?? adjustedScores[r as keyof typeof adjustedScores]);
+    });
+    newScores[param as keyof typeof newScores] = Math.min(5, Math.max(1, parseFloat(score.toFixed(2))));
+  });
+
+  // update final weighted score
+  const total =
+    weights.cost * newScores.cost +
+    weights.timeline * newScores.timeline +
+    weights.compliance * newScores.compliance +
+    weights.design * newScores.design +
+    weights.sustainability * newScores.sustainability;
+
+  setAdjustedScores(newScores);
+  setCurrentScore(parseFloat(total.toFixed(2)));
+};
+
 
   const fetchScoreData = async () => {
     if (!documentId) {
@@ -140,11 +184,9 @@ const ScenarioTuning = () => {
   };
 
   const handleSliderChange = (param: keyof typeof weights, value: number[]) => {
-    if (!adjustedScores) return;
-    const newValues = { ...adjustedScores, [param]: value[0] };
-    setAdjustedScores(newValues);
-    recalculateScore(newValues);
+    recalcScores(param, value[0]);
   };
+
 
   const getScoreColor = (score: number) => {
     if (score >= 4) return "text-success";
