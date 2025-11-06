@@ -12,6 +12,11 @@
 
 **Built by The Multiverse Task Force** — Sparsh Agarwal & Divy Dobariya
 
+### ▶️ Demo Video  
+[![Watch the video](https://img.youtube.com/vi/wvIEoB4jtV4/maxresdefault.jpg)](https://youtu.be/wvIEoB4jtV4?si=h2H9Fpk_EHr-Om3-)
+
+
+
 ---
 
 ## 🎯 Problem Statement
