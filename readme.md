@@ -21,15 +21,21 @@
 
 ## 🎯 Problem Statement
 
-Construction projects face critical challenges:
+This project addresses two critical challenges in construction and capital planning:
 
-**Hidden Insights**: Key contract details, risks, and compliance gaps buried in scattered documents (PDFs, BIM, reports)
+**Challenge 1: What-If Analysis with Explainable AI**:
+- Existing tools cannot simulate project changes in real-time or show impact instantly
+- No transparency on why decisions are suggested, making planning slow and unclear
 
-**No Real-Time Impact Analysis**: Cannot simulate "what-if" scenarios or see instant effects of cost/timeline changes
+**Challenge 2: NLP-based Contract Analysis**:
+- Key contract details are buried in documents, causing delays and missed risks
+- No smart search or automated compliance alerts — review is manual and error-prone
 
-**Opaque Decision-Making**: Existing dashboards show scores without explaining *why* — no transparency in AI reasoning
-
-**Manual Bottlenecks**: Hours wasted searching for clauses, deadlines, and compliance requirements
+Construction projects suffer from:
+- **Scattered Data**: Critical information buried across PDFs, contracts, BIM models, and reports
+- **Manual Review Bottlenecks**: Hours spent searching for clauses, deadlines, and compliance requirements
+- **Opaque Dashboards**: No understanding of *why* metrics are flagged or how scores are calculated
+- **Slow Decision-Making**: Unable to quickly simulate "what-if" scenarios for cost overruns or timeline delays
 
 ---
 
